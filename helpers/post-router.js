@@ -69,6 +69,26 @@ postRouter.delete('/:id', (req, res) => {
      })
  })
  
+ // Put 
+ postRouter.put('/:id', (req, res) => {
+     const { id } = req.params;
+     const postChanges = req.body;
+ 
+     db.update(id, postChanges)
+     .then(postUpdate => {
+         if( !postUpdate) {
+             res.status(404).json({ success: false, message: 'The post with the specified ID does not exist.' })
+         } else if ( !postChanges.text && !postChanges.user_id ) {
+             return res.status(400).json({  success: false, errorMessage: 'Please provide text and user_id for the post.' })
+ 
+         } else {
+             return res.status(200).json({ success: true, postChanges })
+         }
+     })
+     .catch(err => {
+         res.status(500).json({  success: false, error: 'The post information could not be modified'})
+     })
+ })
 
 
 module.exports = postRouter;

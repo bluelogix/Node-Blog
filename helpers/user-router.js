@@ -78,7 +78,7 @@ router.put('/:id', (req, res) => {
         if( !userUpdate) {
             res.status(404).json({ success: false, message: 'The user with the specified ID does not exist.' })
         } else if ( !changes.name ) {
-            return res.status(400).json({  success: false, errorMessage: 'Please provide name for the post.' })
+            return res.status(400).json({  success: false, errorMessage: 'Please provide name for the user.' })
 
         } else {
             return res.status(200).json({ success: true, changes })
