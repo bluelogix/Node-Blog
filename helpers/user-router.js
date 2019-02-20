@@ -3,6 +3,7 @@ const express = require('express');
 const db = require('../helpers/userDb.js');
 const router =  express.Router();
 
+//Get
 router.get('/', (req, res) => {
     db.get()
     .then(users=> {
@@ -48,6 +49,26 @@ router.post('/', (req, res) => {
         })
     }
 });
+
+// Delete 
+router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+
+    db.
+    remove(id)
+    .then(user => {
+        if (user) {
+            res.status(204).end();
+        } else {
+            res.status(404).json({ success: false, message: "The user with the specified ID does not exist." });
+        }
+    })
+        .catch(err => {
+            res.status(500).json({ error: "The user could not be removed" })  
+    })
+})
+
+
 
 
 
