@@ -68,7 +68,26 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+// Put 
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
 
+    db.update(id, changes)
+    .then(userUpdate => {
+        if( !userUpdate) {
+            res.status(404).json({ success: false, message: 'The user with the specified ID does not exist.' })
+        } else if ( !changes.name ) {
+            return res.status(400).json({  success: false, errorMessage: 'Please provide name for the post.' })
+
+        } else {
+            return res.status(200).json({ success: true, changes })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({  success: false, error: 'The user information could not be modified'})
+    })
+})
 
 
 
