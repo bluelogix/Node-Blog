@@ -31,14 +31,14 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// Get User Post
+// Get Users Post by id
 router.get('/:id/posts', (req, res) => {
     const {id} = req.params;
 
     db.getUserPosts(id)
-    .then(users=> {
-        if (users) {
-            res.status(201).json({success: true , users});
+    .then(user=> {
+        if (user) {
+            res.status(201).json({success: true , user});
         } else {
         res.status(404).json({ message: "The user with the specified ID does not exist."})
         }

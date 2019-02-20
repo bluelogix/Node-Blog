@@ -13,7 +13,7 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 //User middleware
-server.use('/api/users', userRouter);
+server.use('/api/users',  userRouter);
 //Posts middleware
 server.use('/api/posts', postRouter);
 
@@ -29,6 +29,14 @@ server.get('/'), (req, res) => {
 }
 
 //Custom middleware
-
-
+function only(name) {
+    return function(req, res, next) {
+        const nameChange = req.params.name 
+        if( nameChange.toUpperCase() === name.toUpperCase()) {
+            next(); 
+        } else {
+            res.status(403).json('Name cannot be changed!')
+        } 
+    }
+}
 module.exports = server;
