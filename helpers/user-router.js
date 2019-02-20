@@ -30,6 +30,25 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// Post 
+router.post('/', (req, res) => {
+   const { name } = req.body;
+   
+    if (!name) {
+        res.status(400).json({errorMessage: 'Please provide name for the user'});
+    } else {
+        db.insert({ name })
+        .then(user => {
+        res.status(201).json( user );
+    })
+    .catch(err  => {
+        res.status(500).json({ 
+             error: 'There was an error while saving the user to the database'
+            });
+        })
+    }
+});
+
 
 
 module.exports = router;

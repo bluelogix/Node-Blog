@@ -9,6 +9,8 @@ const server = express();
 //Middleware
 server.use(express.json());
 server.use(helmet());
+
+//User middleware
 server.use('/api/users', userRouter);
 
 //test get 
