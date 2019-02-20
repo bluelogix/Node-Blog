@@ -18,15 +18,15 @@ router.get('/:id', (req, res) => {
     const {id} = req.params;
 
     db.getById(id)
-    .then(posts=> {
-        if (posts) {
-            res.status(201).json({success: true , posts});
+    .then(users=> {
+        if (users) {
+            res.status(201).json({success: true , users});
         } else {
-        res.status(404).json({ message: "The post with the specified ID does not exist."})
+        res.status(404).json({ message: "The user with the specified ID does not exist."})
         }
     })
     .catch(err => {
-        res.status(500).json({  error: "The post information could not be retrieved."})
+        res.status(500).json({  error: "The user information could not be retrieved."})
     })
 })
 
