@@ -18,6 +18,8 @@ server.use('/api/users', userRouter);
 server.use('/api/posts', postRouter);
 
 
+
+
 //test get 
 server.get('/'), (req, res) => {
     res.send(`
@@ -25,5 +27,8 @@ server.get('/'), (req, res) => {
     
   `);
 }
+
+//Custom middleware
+
 
 module.exports = server;

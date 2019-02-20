@@ -31,6 +31,24 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// Get User Post
+router.get('/:id/posts', (req, res) => {
+    const {id} = req.params;
+
+    db.getUserPosts(id)
+    .then(users=> {
+        if (users) {
+            res.status(201).json({success: true , users});
+        } else {
+        res.status(404).json({ message: "The user with the specified ID does not exist."})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({  error: "The user information could not be retrieved."})
+    })
+})
+
+
 // Post 
 router.post('/', (req, res) => {
    const { name } = req.body;
