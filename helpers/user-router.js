@@ -3,6 +3,15 @@ const express = require('express');
 const db = require('../helpers/userDb.js');
 const router =  express.Router();
 
+
+//Custom middleware
+function nameToUppercase(req, res, next) {
+    req.body.name = req.body.name.toUpperCase();
+    next();
+ }
+
+
+
 //Get
 router.get('/', (req, res) => {
     db.get()
@@ -50,7 +59,7 @@ router.get('/:id/posts', (req, res) => {
 
 
 // Post 
-router.post('/', (req, res) => {
+router.post('/', nameToUppercase, (req, res) => {
    const { name } = req.body;
    
     if (!name) {
@@ -87,7 +96,7 @@ router.delete('/:id', (req, res) => {
 })
 
 // Put 
-router.put('/:id', (req, res) => {
+router.put('/:id', nameToUppercase,(req, res) => {
     const { id } = req.params;
     const changes = req.body;
 
