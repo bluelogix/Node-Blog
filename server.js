@@ -21,12 +21,10 @@ server.use('/api/posts', postRouter);
 
 
 //test get 
-server.get('/'), (req, res) => {
+server.get('/', (req, res) => {
     res.send(`
-    <h2>Node-Blog</h2>
-    
-  `);
-}
+    <h2>Node-Blog</h2>`);
+});
 
 
 module.exports = server;
