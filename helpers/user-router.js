@@ -6,7 +6,7 @@ const router =  express.Router();
 
 //Custom middleware
 function nameToUppercase(req, res, next) {
-    req.body.name = req.body.name.toUpperCase();
+    req.body.name = req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1);
     next();
  }
 
